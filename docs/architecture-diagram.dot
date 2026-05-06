@@ -1,0 +1,82 @@
+digraph Azure_VM_CICD {
+    rankdir=TB;
+    fontname="Arial";
+
+    node [
+        shape=box,
+        style=filled,
+        fontname="Arial"
+    ];
+
+    developer [
+        label="Developer\n(Code Changes)",
+        shape=ellipse,
+        fillcolor="lightgreen"
+    ];
+
+    github [
+        label="GitHub Repository\n(Node.js Source Code)",
+        fillcolor="lightblue"
+    ];
+
+    actions [
+        label="GitHub Actions\n(CI/CD Pipeline)",
+        fillcolor="lightblue"
+    ];
+
+    vm [
+        label="Azure Virtual Machine\n(Ubuntu Linux)",
+        fillcolor="orange"
+    ];
+
+    pm2 [
+        label="PM2 Process Manager",
+        fillcolor="lightyellow"
+    ];
+
+    nginx [
+        label="Nginx Reverse Proxy",
+        fillcolor="lightyellow"
+    ];
+
+    dns [
+        label="Azure DNS Zone\nauemeribetech.com.ng",
+        fillcolor="lightcyan"
+    ];
+
+    domain [
+        label="Custom Domain\nwww.auemeribetech.com.ng\nHTTPS Enabled",
+        fillcolor="lightcyan"
+    ];
+
+    users [
+        label="End Users",
+        shape=ellipse,
+        fillcolor="lightgreen"
+    ];
+
+    developer -> github;
+    github -> actions;
+    actions -> vm;
+    vm -> pm2;
+    pm2 -> nginx;
+    nginx -> dns;
+    dns -> domain;
+    domain -> users;
+
+    subgraph cluster_azure {
+        label="Microsoft Azure";
+        style=dashed;
+
+        vm;
+        dns;
+    }
+
+    subgraph cluster_github {
+        label="GitHub CI/CD";
+        style=dashed;
+
+        github;
+        actions;
+    }
+}
