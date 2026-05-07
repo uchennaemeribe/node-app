@@ -96,7 +96,7 @@ node-app/
 
 brew install graphviz
 ```
-![Graphviz Installation](node-app/screenshots/graphviz-installation.png)
+![Graphviz Installation](screenshots/graphviz-installation.png)
 
 
 ## Step 2 - Verify installation
@@ -104,7 +104,7 @@ brew install graphviz
 ```bash
 dot -V
 ```
-![Graphviz Installation Verification](node-app/screenshots/graphviz-installation-verification.png)
+![Graphviz Installation Verification](screenshots/graphviz-installation-verification.png)
 
 
 ## Step 3 - Create diagram source
@@ -199,7 +199,7 @@ digraph Azure_VM_CICD {
     }
 }
 
-![Diagram Source Codes](node-app/screenshots/diagram-source-codes.png)
+![Diagram Source Codes](screenshots/diagram-source-codes.png)
 
 ## Step 4 - Generate PNG:
 ```bash
@@ -285,7 +285,7 @@ nano package.json
   "start": "node index.js"
 }
 ```
-![Updated Package.json](node-app/screenshots/package.json-update.png)
+![Updated Package.json](screenshots/package.json-update.png)
 ---
 
 ## Step 6 — Test Application Locally
@@ -299,7 +299,7 @@ Visit:
 ```text
 http://localhost:3000
 ```
-![Remote Application Testing](node-app/screenshots/remote-application-testing.png)
+![Remote Application Testing](screenshots/remote-application-testing.png)
 ---
 
 # PHASE 2 — PUSH APPLICATION TO GITHUB
@@ -324,7 +324,7 @@ npm-debug.log
 coverage/
 dist/
 ```
-![.gitignore File Creation](node-app/screenshots/file.gitignore-creation.png)
+![.gitignore File Creation](screenshots/file.gitignore-creation.png)
 ---
 
 ## Step 8 — Login to git and Initialize Git Repository
@@ -335,7 +335,7 @@ git init
 git add .
 git commit -m "Initial Node.js application"
 ```
-![Github Login & Git Repo Intialization](node-app/screenshots/github-login-git_repo-initialization.png)
+![Github Login & Git Repo Intialization](screenshots/github-login-git_repo-initialization.png)
 ---
 
 ## Step 9 — Change branch name for your git
@@ -344,7 +344,7 @@ git commit -m "Initial Node.js application"
 git branch -M main
 
 ```
-![Git Repo Branch Name Change](node-app/screenshots/git-repo-branch-name-change.png)
+![Git Repo Branch Name Change](screenshots/git-repo-branch-name-change.png)
 
 ---
 
@@ -353,18 +353,17 @@ git branch -M main
 ```bash
 gh repo create node-app --public --source=. --remote=origin --push
 ```
-![Git Repo Creation and Code Pushing to Repo](node-app/screenshots/github-repo-creation-code-push)
+![Git Repo Creation and Code Pushing to Repo](screenshots/github-repo-creation-code-push.png)
 
 2. Verify configured repo
 
 ```bash
 git remote -v
----
-![Configured Git Repo Verification](node-app/screenshots/configured-repo-verification.png)
+```
+![Configured Git Repo Verification](screenshots/configured-github-repo-verification.png)
 
 # PHASE 3 — CREATE AZURE VM USING AZURE CLI
 
----
 
 ## Step 11 — Login to Azure
 
@@ -372,7 +371,7 @@ git remote -v
 az login
 ```
 
-![Azure Login](node-app/screenshots/azure-login.png)
+![Azure Login](screenshots/azure-login.png)
 ---
 
 ## Step 12 — Create Resource Group
@@ -380,7 +379,7 @@ az login
 ```bash
 az group create --name nodeRG --location westus
 ```
-![Azure Resource Group Creation](node-app/screenshots/resource-group-creation.png)
+![Azure Resource Group Creation](screenshots/resource-group-creation.png)
 ---
 
 ## Step 13 — Create Azure Virtual Machine
@@ -389,14 +388,14 @@ az group create --name nodeRG --location westus
 ```bash
 az vm create --resource-group nodeRG --name node-app-vm --image Ubuntu2204 --admin-username azureuser --generate-ssh-keys --size Standard_B1s
 ```
-![Azure VM SKU availability error](node-app/screenshots/azure-VM-SKU-availability-error.png)
+![Azure VM SKU availability error](screenshots/azure-VM-SKU-availability-error.png)
 
 2. Troubleshoot using:
 
 ```bash
 az vm create --resource-group nodeRG --name node-app-vm --image Ubuntu2204 --admin-username azureuser --generate-ssh-keys --size Standard_D2s_v3
 ```
-![Azure VM Creation](node-app/screenshots/azure-vm-creation.png)
+![Azure VM Creation](screenshots/azure-vm-creation.png)
 
 Azure returns:
 - public IP
@@ -413,13 +412,13 @@ Save the public IP.
 ```bash
 az vm open-port --resource-group nodeRG --name node-app-vm --port 22
 ```
-![Openning SSH Port 22](node-app/screenshots/ssh-port-22.png)
+![Openning SSH Port 22](screenshots/ssh-port-22.png)
 
 ### Open HTTP Port by Creating Network Security Group Rule for port 80
 ```bash
 az network nsg rule create --resource-group nodeRG --nsg-name node-app-vmNSG --name allow-http --priority 1010 --destination-port-ranges 80 --access Allow --protocol Tcp
 ```
-![Network Security Group Creation](node-app/screenshots/nsg-rule-creation.png)
+![Network Security Group Creation](screenshots/nsg-rule-creation.png)
 
 
 ### Open HTTPS Port
@@ -427,7 +426,7 @@ az network nsg rule create --resource-group nodeRG --nsg-name node-app-vmNSG --n
 ```bash
 az network nsg rule create --resource-group nodeRG --nsg-name node-app-vmNSG --name allow-https --priority 1020 --destination-port-ranges 443 --access Allow --protocol Tcp
 ```
-![Opening HTTPS Port](node-app/screenshots/https-port.png)
+![Opening HTTPS Port](screenshots/https-port.png)
 ---
 
 ## Step 15 — Get VM Public IP
@@ -435,7 +434,7 @@ az network nsg rule create --resource-group nodeRG --nsg-name node-app-vmNSG --n
 ```bash
 az vm show --resource-group nodeRG --name node-app-vm -d --query publicIps -o tsv
 ```
-![VM Public IP Retrieval](node-app/screenshots/public-ip-retrieval.png)
+![VM Public IP Retrieval](screenshots/public-ip-retrieval.png)
 ---
 
 # PHASE 4 — CONNECT TO VM
@@ -453,7 +452,7 @@ Example:
 ```bash
 ssh azureuser@172.182.253.80
 ```
-![Accessing Azure VM](node-app/screenshots/accessing-azure-vm.png)
+![Accessing Azure VM](screenshots/accessing-azure-vm.png)
 ---
 
 # PHASE 5 — CONFIGURE SERVER
@@ -466,7 +465,7 @@ ssh azureuser@172.182.253.80
 sudo apt update
 sudo apt upgrade -y
 ```
-![Updating Ubuntu Packages](node-app/screenshots/ubuntu-packages-update.png)
+![Updating Ubuntu Packages](screenshots/ubuntu-packages-update.png)
 ---
 
 ## Step 18 — Install Node.js
@@ -476,14 +475,14 @@ sudo apt upgrade -y
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 ```
-![Node.js v20 Pre-requisite Installation](node-app/screenshots/node.js-v20-pre-requisites-installation.png)
+![Node.js v20 Pre-requisite Installation](screenshots/node.js-v20-pre-requisites-installation.png)
 
 2. Then install Node.js v20 using:
 
 ```bash
 sudo apt install -y nodejs
 ```
-![Node.js v20 Installation](node-app/screenshots/node.js-v20-installation.png)
+![Node.js v20 Installation](screenshots/node.js-v20-installation.png)
 
 3. Verify installation:
 
@@ -491,7 +490,7 @@ sudo apt install -y nodejs
 node -v
 npm -v
 ```
-![Node.js v20 Installation Verification](node-app/screenshots/node.js-installation-verification.png)
+![Node.js v20 Installation Verification](screenshots/node.js-installation-verification.png)
 ---
 
 ## Step 19 — Install Nginx
@@ -499,7 +498,7 @@ npm -v
 ```bash
 sudo apt install nginx -y
 ```
-![Nginx Installation](node-app/screenshots/nginx-installation.png)
+![Nginx Installation](screenshots/nginx-installation.png)
 
 2. Enable and start Nginx:
 
@@ -507,21 +506,21 @@ sudo apt install nginx -y
 sudo systemctl enable nginx
 sudo systemctl start nginx
 ```
-![Nginx Enabled and Started](node-app/screenshots/nginx-enabled-activated.png)
+![Nginx Enabled and Started](screenshots/nginx-enabled-activated.png)
 ---
 3. Upgrade npm packages and verify installation using:
 ```bash
 sudo npm install -g npm@11.14.0
 npm -v
 ```
-![NPM Upgraded and Verified](node-app/screenshots/npm-upgrade-verification.png)
+![NPM Upgraded and Verified](screenshots/npm-upgrade-verification.png)
 
 ## Step 20 — Install PM2
 1. Run
 ```bash
 sudo npm install -g pm2
 ```
-![PM2 Installation](node-app/screenshots/pm2-installation.png)
+![PM2 Installation](screenshots/pm2-installation.png)
 
 2. Verify PM2 Installation:
 
@@ -529,7 +528,7 @@ sudo npm install -g pm2
 pm2 -v
 ```
 
-![Successful PM2 Installation Verification](node-app/screenshots/pm2-installation-verification.png)
+![Successful PM2 Installation Verification](screenshots/pm2-installation-verification.png)
 ---
 
 # PHASE 6 — DEPLOY APPLICATION
@@ -541,14 +540,14 @@ pm2 -v
 ```bash
 git clone https://github.com/uchennaemeribe/node-app.git
 ```
-![Cloned Github Repository](node-app/screenshots/cloned-repository.png)
+![Cloned Github Repository](screenshots/cloned-repository.png)
 
 2. Move into project:
 
 ```bash
 cd node-app
 ```
-![Movement Into Project Directory](node-app/screenshots/movement-into-node.app.png)
+![Movement Into Project Directory](screenshots/movement-into-node.app.png)
 ---
 
 ## Step 22 — Install Dependencies
@@ -556,7 +555,7 @@ cd node-app
 ```bash
 npm install
 ```
-![NPM Installation](node-app/screenshots/npm-installation.png)
+![NPM Installation](screenshots/npm-installation.png)
 ---
 
 ## Step 23 — Start Application with PM2
@@ -564,7 +563,7 @@ npm install
 ```bash
 pm2 start index.js --name my-app
 ```
-![Application Activation Using PM2](node-app/screenshots/application-activation-with-pm2.png)
+![Application Activation Using PM2](screenshots/application-activation-with-pm2.png)
 
 2. Save PM2:
 
@@ -578,7 +577,7 @@ pm2 save
 ```bash
 pm2 startup
 ```
-![Enabled PM2 Startup](node-app/screenshots/enabled-pm2-startup.png)
+![Enabled PM2 Startup](screenshots/enabled-pm2-startup.png)
 
 Run the generated command.
 
@@ -589,7 +588,7 @@ Run the generated command.
 ```bash
 pm2 status
 ```
-![PM2 Status Verification](node-app/screenshots/pm2-status-verification.png)
+![PM2 Status Verification](screenshots/pm2-status-verification.png)
 ---
 
 # PHASE 7 — CONFIGURE NGINX
@@ -619,7 +618,7 @@ Save:
 - Y
 - ENTER
 
-![Reverse Proxy Configuration](node-app/screenshots/reverse-proxy-configuration.png)
+![Reverse Proxy Configuration](screenshots/reverse-proxy-configuration.png)
 ---
 
 ## Step 26 — Restart Nginx
@@ -627,14 +626,14 @@ Save:
 ```bash
 sudo systemctl restart nginx
 ```
-![Nginx Restart](node-app/screenshots/nginx-restart.png)
+![Nginx Restart](screenshots/nginx-restart.png)
 
 Test:
 
 ```text
 http://172.182.253.80
 ```
-![Public IP Testing](node-app/screenshots/public-ip-testing.png)
+![Public IP Testing](screenshots/public-ip-testing.png)
 ---
 Exit the VM and proceed to your project directory (node-app) to execute phase 8.
 
@@ -662,7 +661,7 @@ Check:
 gh auth status
 ```
 
-![GitHub CLI Authentication Verification](node-app/screenshots/github-cli-authentication-verification.png)
+![GitHub CLI Authentication Verification](screenshots/github-cli-authentication-verification.png)
 
 If not authenticated:
 
@@ -681,7 +680,7 @@ git remote -v
 ```
 You should see your GitHub repository URL.
 
-![GitHub Repository Connection Verification](node-app/screenshots/github-repo-connection-verification.png)
+![GitHub Repository Connection Verification](screenshots/github-repo-connection-verification.png)
 ---
 
 3. Add VM Public IP Secret
@@ -694,7 +693,7 @@ gh secret set VM_IP --body "172.182.253.80"
 
 Replace with your actual Azure VM static public IP if different.
 
-![GitHub Secret Configuration Using Azure VM Public IP](node-app/screenshots/git-secret-config-public-ip.png)
+![GitHub Secret Configuration Using Azure VM Public IP](screenshots/git-secret-config-public-ip.png)
 ---
 
 4. Add VM Username Secret
@@ -705,7 +704,7 @@ Run:
 gh secret set VM_USER --body "azureuser"
 ```
 
-![GitHub Secret Configuration Using Azure VM User](node-app/screenshots/git-secret-config-vm-user.png)
+![GitHub Secret Configuration Using Azure VM User](screenshots/git-secret-config-vm-user.png)
 ---
 
 5. Generate SSH Key Pair (If Needed)
@@ -724,7 +723,7 @@ This creates:
 ~/.ssh/id_rsa
 ~/.ssh/id_rsa.pub
 ```
-![Private Key Creation](node-app/screenshots/private-key-creation.png)
+![Private Key Creation](screenshots/private-key-creation.png)
 ---
 
 6. Upload SSH Private Key to GitHub Secrets
@@ -734,7 +733,7 @@ Run:
 ```bash
 gh secret set SSH_PRIVATE_KEY < ~/.ssh/cicd-key.pem
 ```
-![GitHub Secret Configuration Using Private Key](node-app/screenshots/git-secret-config-private-key.png)
+![GitHub Secret Configuration Using Private Key](screenshots/git-secret-config-private-key.png)
 
 If your key file is elsewhere:
 
@@ -762,7 +761,7 @@ VM_USER
 SSH_PRIVATE_KEY
 ```
 
-![GitHub Secret Configuration Verification](node-app/screenshots/github-secret-configuration-verification.png)
+![GitHub Secret Configuration Verification](screenshots/github-secret-configuration-verification.png)
 ---
 
 ## Step 28 — Create GitHub Actions Workflow
@@ -770,6 +769,8 @@ SSH_PRIVATE_KEY
 1. Create:
 
 ```bash
+mkdir -p .github/workflows
+
 touch .github/workflows/deploy.yml
 ```
 
@@ -806,7 +807,7 @@ jobs:
             pm2 restart my-app
 ```
 
-![Workflow Creation](node-app/screenshots/workflow-creation.png)
+![Workflow Creation](screenshots/workflow-creation.png)
 ---
 
 ## Step 29 — Push Workflow to GitHub
@@ -816,7 +817,7 @@ git add .
 git commit -m "Add CI/CD workflow"
 git push origin main
 ```
-![Workflow Pushed to GitHub](node-app/screenshots/workflow-pushed-to-github.png)
+![Workflow Pushed to GitHub](screenshots/workflow-pushed-to-github.png)
 ---
 
 ## Step 30 — Verify GitHub Actions
@@ -829,7 +830,7 @@ GitHub Repository → Actions
 
 The workflow should run automatically.
 
-![GitHub Action Verfication](node-app/screenshots/successful-github-action.png)
+![GitHub Action Verfication](screenshots/successful-github-action.png)
 ---
 
 # PHASE 9 — CONFIGURE AZURE DNS
@@ -839,61 +840,58 @@ The workflow should run automatically.
 ## Step 31 — Create Azure DNS Zone
 
 ```bash
-az network dns zone create \
-  --resource-group nodeRG \
-  --name auemeribetech.com.ng
+az network dns zone create --resource-group nodeRG --name auemeribetech.com.ng
 ```
-
+![Azure DNS Zone Creation](screenshots/azure-dns-zone-creation.png)
 ---
 
 ## Step 32 — Get Azure Nameservers
 
 ```bash
-az network dns zone show \
-  --resource-group nodeRG \
-  --name auemeribetech.com.ng \
-  --query nameServers
+az network dns zone show --resource-group nodeRG --name auemeribetech.com.ng --query nameServers
 ```
-
+![Azure DNS Nameservers Retrieval](screenshots/azure-nameservers-retrieval.png)
 Copy the nameservers.
 
 ---
 
 ## Step 33 — Update Nameservers at Domain Registrar
 
-Go to:
+1. Go to:
 - QServers
 - Namecheap
 - GoDaddy
 
 Replace existing nameservers with Azure nameservers.
 
-Wait for propagation.
+![Domain Registrar Update Using Nameservers](screenshots/domain-registrar-update-with-nameservers.png)
 
+2. Wait for propagation
+
+3. After approximately 10–15 minutes, verify that the domain is now using Azure DNS nameservers.
+
+Run:
+
+```bash
+dig auemeribetech.com.ng NS
+```
+![Domain Verification on Using Nameservers](screenshots/domain-nameserver-verification.png)
 ---
 
 ## Step 34 — Create Root Domain A Record
 
 ```bash
-az network dns record-set a add-record \
-  --resource-group nodeRG \
-  --zone-name auemeribetech.com.ng \
-  --record-set-name @ \
-  --ipv4-address YOUR_PUBLIC_IP
+az network dns record-set a add-record --resource-group nodeRG --zone-name auemeribetech.com.ng --record-set-name @ --ipv4-address 172.182.253.80
 ```
-
+![Root Domain A Record Creation](screenshots/root-domain-a-record-creation.png)
 ---
 
 ## Step 35 — Create WWW Record
 
 ```bash
-az network dns record-set a add-record \
-  --resource-group nodeRG \
-  --zone-name auemeribetech.com.ng \
-  --record-set-name www \
-  --ipv4-address YOUR_PUBLIC_IP
+az network dns record-set a add-record --resource-group nodeRG --zone-name auemeribetech.com.ng --record-set-name www --ipv4-address 172.182.253.80
 ```
-
+![WWW Record Creation](screenshots/www-record-creation.png)
 ---
 
 # PHASE 10 — CONFIGURE DOMAIN IN NGINX
@@ -902,11 +900,18 @@ az network dns record-set a add-record \
 
 ## Step 36 — Update Nginx Configuration
 
+1. Access the Azure VM
+```bash
+ssh azureuser@172.182.253.80
+```
+![Accessing the Azure VM](screenshots/azure-vm-access.png)
+
+2. Open Nginx
 ```bash
 sudo nano /etc/nginx/sites-available/default
 ```
 
-Replace with:
+3. Replace Nginx content with:
 
 ```nginx
 server {
@@ -919,19 +924,21 @@ server {
     }
 }
 ```
+![Updating Nginx](screenshots/nginx-configuration-update.png)
 
-Restart Nginx:
+3. Restart Nginx:
 
 ```bash
 sudo systemctl restart nginx
 ```
+![Restarting Nginx](screenshots/nginx_restart.png)
 
-Test:
+4. Test:
 
 ```text
 http://www.auemeribetech.com.ng
 ```
-
+![Domain Name Testing](screenshots/domain-name-testing.png)
 ---
 
 # PHASE 11 — ENABLE HTTPS
@@ -943,7 +950,7 @@ http://www.auemeribetech.com.ng
 ```bash
 sudo apt install certbot python3-certbot-nginx -y
 ```
-
+![Certbot Installation](screenshots/certbot-installation.png)
 ---
 
 ## Step 38 — Configure SSL Certificate
@@ -957,6 +964,7 @@ Choose:
 - www.auemeribetech.com.ng
 - redirect HTTP to HTTPS
 
+![SSL Certificate Configuration](screenshots/ssl-certificate-configuration.png)
 ---
 
 ## Step 39 — Verify HTTPS
@@ -969,6 +977,7 @@ https://www.auemeribetech.com.ng
 
 The application should now be secured with HTTPS.
 
+![HTTPS Verification](screenshots/https-verification.png)
 ---
 
 # PHASE 12 — TEST FULL CI/CD PIPELINE
