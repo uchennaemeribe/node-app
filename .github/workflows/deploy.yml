@@ -1,41 +1,28 @@
 name: Deploy to Azure VM
 
 on:
-
   push:
-
     branches:
-
       - main
 
 jobs:
 
   deploy:
-
     name: Deploy Application to Azure VM
-
     runs-on: ubuntu-latest
 
     steps:
 
       - name: Deploy via SSH
-
         uses: appleboy/ssh-action@v1.0.3
 
         with:
-
           host: ${{ secrets.VM_IP }}
-
           username: ${{ secrets.VM_USER }}
-
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 
           script: |
-
             cd node-app
-
             git pull origin main
-
             npm install
-
             pm2 restart my-app
