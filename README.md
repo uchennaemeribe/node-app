@@ -66,23 +66,7 @@ End Users
 
 # Project Structure
 
-node-app/
-├── .github/
-│   └── workflows/
-│       └── deploy.yml
-├── docs/
-│   ├── architecture-diagram.dot
-│   ├── architecture-diagram.png
-│   └── architecture-diagram.svg
-├── screenshots/
-│   ├── azure-vm.png
-│   ├── github-actions.png
-│   └── https-success.png
-├── .gitignore
-├── index.js
-├── package.json
-├── package-lock.json
-└── README.md
+![Graphviz Installation](screenshots/project-structure.png)
 ---
 
 # PHASE 0 — CREATE ARCHITECTURE DIAGRAM
@@ -1000,6 +984,8 @@ res.send('Production Deployment Successful!');
 
 ---
 
+![Updated index.js](screenshots/updated-index.js.png)
+
 ## Step 41 — Push Changes
 
 ```bash
@@ -1007,6 +993,7 @@ git add .
 git commit -m "Test automated deployment"
 git push origin main
 ```
+![Updated index.js](screenshots/github-repo-updated.png)
 
 GitHub Actions automatically:
 - connects to VM
@@ -1014,12 +1001,15 @@ GitHub Actions automatically:
 - installs dependencies
 - restarts PM2
 
+
+![Successful Github CI/CD Pipeline Deployment](screenshots/successful-ci-cd-deployment.png)
+
 Refresh:
 
 ```text
 https://www.auemeribetech.com.ng
 ```
-
+![Verifying Updates Using Domain](screenshots/domain-testing-updates.png)
 ---
 
 # Common Errors and Fixes
@@ -1082,10 +1072,7 @@ You successfully built:
 # Cleanup Resources
 
 ```bash
-az group delete \
-  --name nodeRG \
-  --yes \
-  --no-wait
+az group delete --name nodeRG --yes --no-wait
 ```
 
 ---
