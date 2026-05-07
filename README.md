@@ -205,7 +205,6 @@ digraph Azure_VM_CICD {
 ```bash
 dot -Tpng architecture-diagram.dot -o architecture-diagram.png
 ```
-![Architecture Diagram PNG Version](docs/architecture-diagram.png)
 
 ## Step 5 - Generate SVG:
 
@@ -225,7 +224,8 @@ dot -Tsvg architecture-diagram.dot -o architecture-diagram.svg
 mkdir node-app
 cd node-app
 ```
-![Project Directory Creation](node-app/screenshots/node-app—creation-diagram.svg)
+![Project Directory Creation](screenshots/node-app-creation.png)
+
 ---
 
 ## Step 2 — Initialize Node.js Application
@@ -233,7 +233,7 @@ cd node-app
 ```bash
 npm init -y
 ```
-![Node.js Application Initialization](node-app/screenshots/node.js-initialization.png)
+![Node.js Application Initialization](screenshots/node.js-initialization.png)
 ---
 
 ## Step 3 — Install Express.js
@@ -241,7 +241,7 @@ npm init -y
 ```bash
 npm install express
 ```
-![Express.js Installation](node-app/screenshots/express.js-installation.png)
+![Express.js Installation](screenshots/express.js-installation.png)
 ---
 
 ## Step 4 — Create index.js
@@ -270,7 +270,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 ```
-![Index.js Creation](node-app/screenshots/index.js-creation.png)
+![Index.js Creation](screenshots/index.js-creation.png)
 ---
 
 ## Step 5 — Update package.json
