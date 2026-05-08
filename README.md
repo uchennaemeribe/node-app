@@ -66,7 +66,7 @@ End Users
 
 # Project Structure
 
-![Graphviz Installation](screenshots/project-structure.png)
+![Project Structure](screenshots/project-structure.png)
 ---
 
 # PHASE 0 — CREATE ARCHITECTURE DIAGRAM
@@ -1074,7 +1074,7 @@ You successfully built:
 ```bash
 az group delete --name nodeRG --yes --no-wait
 ```
-
+![Cleanup Resources](screenshots/cleanup-resources.png)
 ---
 
 # Author
